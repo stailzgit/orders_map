@@ -1,0 +1,9 @@
+.table-wrap {
+  overflow-x: auto;
+  padding: 10px;
+  height: 100%;
+}
+
+.table {
+  min-width: 400px;
+}

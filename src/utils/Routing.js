@@ -24,6 +24,7 @@ const updateRouting = (map, way) => {
         icon: L.icon({
           iconUrl: "https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon.png",
           iconSize: [30],
+          iconAnchor: [15, 45],
         }),
       });
       return marker;

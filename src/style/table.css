@@ -2,6 +2,12 @@
   overflow-x: auto;
   padding: 10px;
   height: 100%;
+  width: 100%;
+}
+
+.table {
+  width: 50vw;
+  min-width: 20vw;
 }
 
 

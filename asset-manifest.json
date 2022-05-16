@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/orders_map/static/css/main.b531f21d.css",
+    "main.js": "/orders_map/static/js/main.b2539224.js",
+    "index.html": "/orders_map/index.html",
+    "main.b531f21d.css.map": "/orders_map/static/css/main.b531f21d.css.map",
+    "main.b2539224.js.map": "/orders_map/static/js/main.b2539224.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.b531f21d.css",
+    "static/js/main.b2539224.js"
+  ]
+}

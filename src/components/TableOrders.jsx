@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Table, Select } from "antd";
 import { useSelector } from "react-redux";
 import { useActions } from "../hooks/useActions";
@@ -10,13 +10,13 @@ const TableOrders = React.memo(() => {
     (state) => state.orders
   );
 
-  const [selectedKeys, setSelectedKeys] = React.useState([]);
+  const [selectedKeys, setSelectedKeys] = useState([]);
 
   const myRowSelection = {
     selectedRowKeys: selectedKeys,
-    onSelect: (record, selected) => {
-      console.log(record);
-    },
+    // onSelect: (record, selected) => {
+    //   console.log(record);
+    // },
     onChange: (selectedRowKeys, selectedRows) => {
       console.log(
         `selectedRowKeys: ${selectedRowKeys}`,

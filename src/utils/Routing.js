@@ -14,12 +14,12 @@ const updateRouting = (map, way) => {
 
   const routingControl = L.Routing.control({
     waypoints: way,
-    routeWhileDragging: true,
+    routeWhileDragging: false,
     show: false,
     fitSelectedRoutes: true,
     createMarker: function(i, waypoint, n) {
       const marker = L.marker(waypoint.latLng, {
-        draggable: true,
+        draggable: false,
         bounceOnAdd: false,
         icon: L.icon({
           iconUrl: "https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon.png",

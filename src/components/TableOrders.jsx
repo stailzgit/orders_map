@@ -2,7 +2,6 @@ import React from "react";
 import { Table, Select } from "antd";
 import { useSelector } from "react-redux";
 import { useActions } from "../hooks/useActions";
-import SubMenu from "antd/lib/menu/SubMenu";
 const { Option } = Select;
 
 const TableOrders = React.memo(() => {
@@ -38,10 +37,6 @@ const TableOrders = React.memo(() => {
     key: order.id,
   }));
 
-  // const onChangeSelect = (value) => {
-  //   setLoadingPoint(value);
-  // };
-
   const columns = [
     {
       title: "ID",
@@ -52,17 +47,17 @@ const TableOrders = React.memo(() => {
       title: "Погрузка",
       dataIndex: "loading",
       key: "loading",
-      width: "100%",
-      // minWidth: 100,
+      width: "auto",
       render: (loading) => (
         <Select
-          style={{ width: 200 }}
+          title={`${loading.name}, ${loading.subName}`}
+          style={{ width: 150 }}
           defaultValue={loading?.id}
           key={loading.id}
           onChange={(value) => setLoadingPoint(value)}
         >
           {points.map(({ name, id, subName }) => (
-            <Option key={id} value={id}>
+            <Option key={id} value={id} title={`${name}, ${subName}`}>
               {name}, {subName}
             </Option>
           ))}
@@ -73,17 +68,17 @@ const TableOrders = React.memo(() => {
       title: "Разгрузка",
       dataIndex: "unLoading",
       key: "unLoading",
-      width: "100%",
-      // minWidth: 100,
+      width: "auto",
       render: (unLoading) => (
         <Select
-          style={{ width: 200 }}
+          title={`${unLoading.name}, ${unLoading.subName}`}
+          style={{ width: 150 }}
           defaultValue={unLoading?.id}
           key={unLoading.id}
           onChange={(value) => setUnLoadingPoint(value)}
         >
           {points.map(({ name, id, subName }) => (
-            <Option key={id} value={id}>
+            <Option key={id} value={id} title={`${name}, ${subName}`}>
               {name}, {subName}
             </Option>
           ))}

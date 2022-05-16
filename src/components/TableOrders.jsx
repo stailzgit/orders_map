@@ -1,15 +1,30 @@
 import React from "react";
 import { Table, Select } from "antd";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useActions } from "../hooks/useActions";
 const { Option } = Select;
 
-const TableOrders = React.memo(({ setWay }) => {
-  const { setLoadingPoint, setUnLoadingPoint, setCurrentOrder } = useActions;
-
+const TableOrders = React.memo(() => {
+  const { setLoadingPoint, setUnLoadingPoint, setCurrentOrder } = useActions();
   const { orders, points, currentOrderId } = useSelector(
     (state) => state.orders
   );
+
+  const [selectedKeys, setSelectedKeys] = React.useState([]);
+
+  const myRowSelection = {
+    selectedRowKeys: selectedKeys,
+    onSelect: (record, selected) => {
+      console.log(record);
+    },
+    onChange: (selectedRowKeys, selectedRows) => {
+      console.log(
+        `selectedRowKeys: ${selectedRowKeys}`,
+        "selectedRows: ",
+        selectedRows
+      );
+    },
+  };
 
   const getPointById = (id) => {
     return points.filter((point) => point.id === id)[0];
@@ -22,6 +37,10 @@ const TableOrders = React.memo(({ setWay }) => {
     key: order.id,
   }));
 
+  const onChangeSelect = (value) => {
+    setLoadingPoint(value);
+  };
+
   const columns = [
     {
       title: "ID",
@@ -32,14 +51,16 @@ const TableOrders = React.memo(({ setWay }) => {
       title: "Погрузка",
       dataIndex: "loading",
       key: "loading",
+      width: "auto",
+      minWidth: 200,
       render: (loading) => (
         <Select
-          style={{ width: 200 }}
-          value={loading?.name}
+          style={{ minWidth: 150, width: 200 }}
+          defaultValue={loading?.id}
           key={loading.id}
-          onChange={() => setLoadingPoint(loading.id)}
+          onChange={onChangeSelect}
         >
-          {points.map(({ name, id }) => (
+          {points.map(({ name, id, subName }) => (
             <Option key={id} value={id}>
               {name}
             </Option>
@@ -51,14 +72,16 @@ const TableOrders = React.memo(({ setWay }) => {
       title: "Разгрузка",
       dataIndex: "unLoading",
       key: "unLoading",
+      width: "auto",
+      minWidth: 200,
       render: (unLoading) => (
         <Select
-          style={{ width: 200 }}
-          value={unLoading?.name}
+          style={{ minWidth: 150, width: 200 }}
+          defaultValue={unLoading?.name}
           key={unLoading.id}
-          onChange={() => setUnLoadingPoint(unLoading.id)}
+          onChange={(value) => setUnLoadingPoint(value)}
         >
-          {points.map(({ name, id }) => (
+          {points.map(({ name, id, subName }) => (
             <Option key={id} value={id}>
               {name}
             </Option>
@@ -68,18 +91,28 @@ const TableOrders = React.memo(({ setWay }) => {
     },
   ];
 
-  const onWayClick = (way) => {
-    setWay(way);
+  const onCurrentOrderChange = (id) => {
+    if (id !== currentOrderId) setCurrentOrder(id);
   };
+
   return (
     <div className="table-wrap">
-      <Table dataSource={dataSource} columns={columns} className="table" />
-
-      {/* {data.map((item) => (
-        <div key={item.id} onClick={() => onWayClick(item.way)}>
-          {item.name}
-        </div>
-      ))} */}
+      <Table
+        onRow={(record) => ({
+          onClick: () => {
+            onCurrentOrderChange(record.id);
+            setSelectedKeys([record.key]);
+          },
+        })}
+        rowSelection={{
+          type: "radio",
+          ...myRowSelection,
+        }}
+        dataSource={dataSource}
+        columns={columns}
+        className="table"
+        pagination={false}
+      />
     </div>
   );
 });

@@ -4,6 +4,10 @@
   height: 100%;
 }
 
-.table {
-  min-width: 400px;
+
+/* Hide radio in table */
+
+.ant-table-selection-col,
+.ant-table-selection-column {
+  display: none;
 }

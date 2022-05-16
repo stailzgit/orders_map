@@ -1,14 +1,16 @@
 import { OrdersAction } from "./types";
 
 export const ordersActionCreators = {
-  setLoadingPoint: (orderId, pointId) => ({
+  setLoadingPoint: (pointId) => ({
     type: OrdersAction.SET_LOADING_POINT,
-    payload: { orderId, pointId },
+    payload: { pointId },
   }),
-  setUnLoadingPoint: (orderId, pointId) => ({
+
+  setUnLoadingPoint: (pointId) => ({
     type: OrdersAction.SET_UNLOADING_POINT,
-    payload: { orderId, pointId },
+    payload: { pointId },
   }),
+
   setCurrentOrder: (orderId) => ({
     type: OrdersAction.SET_CURRENT_ORDER,
     payload: { orderId },

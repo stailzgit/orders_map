@@ -8,11 +8,6 @@ import useResizable from "./hooks/useResizable";
 function App() {
   const { size, onSizeChange } = useResizable();
 
-  const [way, setWay] = useState([
-    { lat: 41.505, lng: -0.08 },
-    { lat: 51.505, lng: -0.09 },
-  ]);
-
   return (
     <div className="app">
       <Resizable
@@ -21,10 +16,10 @@ function App() {
         size={{ width: size.width, height: size.height }}
         onResizeStop={(d) => onSizeChange(d)}
       >
-        <TableOrders way={way} setWay={setWay} />
+        <TableOrders />
       </Resizable>
 
-      <MapComponent way={way} sizeTable={size} />
+      <MapComponent sizeTable={size} />
     </div>
   );
 }
